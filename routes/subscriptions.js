@@ -14,8 +14,8 @@ router
 	})
 	.post(async (req, res) => {
 		try {
-			const subscription = await Subscriptor.create(req.body);
-			res.status(201).json({ subscription, status: 'sucess' });
+			await Subscriptor.create(req.body);
+			res.status(201).json({ status: 'Sucess' });
 		} catch (err) {
 			res.status(500).json({ err });
 		}
