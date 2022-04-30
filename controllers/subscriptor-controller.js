@@ -16,7 +16,7 @@ const getSubscriptors = async (req, res) => {
 const createSubscriptor = async (req, res) => {
 	try {
 		await Subscriptor.create(req.body);
-		res.status(201).json({ status: 'Sucess' });
+    res.status(201).json({ status: 'Created sucessfully' });
 	} catch (err) {
 		res.status(500).json({ err });
 	}
@@ -29,7 +29,7 @@ const deleteSubscriptor = async (req, res) => {
 		await Subscriptor.findOneAndDelete({
 			_id: subscriptor_id,
 		});
-		res.status(200).json({ status: 'deleted' });
+		res.status(200).json({ status: 'Deleted sucessfully' });
 	} catch (err) {
 		res.status(500).json({ err });
 	}
