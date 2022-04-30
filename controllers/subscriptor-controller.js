@@ -4,7 +4,9 @@ const Subscriptor = require('../models/subscriptor');
 const getSubscriptors = async (req, res) => {
 	try {
 		const subscriptions = await Subscriptor.find({});
-		res.status(200).json({ subscriptions, status: 'sucess' });
+		res
+			.status(200)
+			.json({ results: subscriptions.length, subscriptions, status: 'sucess' });
 	} catch (err) {
 		res.status(500).json({ err });
 	}
