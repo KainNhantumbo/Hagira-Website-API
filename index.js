@@ -4,11 +4,13 @@ const env = require('dotenv');
 const cors = require('cors');
 const db_connetion = require('./database/connect');
 const subscriptorRoutes = require('./routes/subscriptions');
+const not_foundRoute = require('./middlewares/not-found');
 
 // middlewares
 app.use(express.json());
 app.use(cors());
 app.use('/api/v1', subscriptorRoutes);
+app.use(not_foundRoute);
 
 // config
 env.config();
