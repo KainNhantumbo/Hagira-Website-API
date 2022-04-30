@@ -1,10 +1,14 @@
 const express = require('express');
 const app = express();
 const env = require('dotenv');
+const cors = require('cors');
 const db_connetion = require('./database/connect');
+const subscriptorRoutes = require('./routes/subscriptions');
 
 // middlewares
 app.use(express.json());
+app.use(cors());
+app.use('/api/v1', subscriptorRoutes);
 
 // config
 env.config();
@@ -22,4 +26,4 @@ const start_server = async () => {
 	}
 };
 
-start_server()
+start_server();
