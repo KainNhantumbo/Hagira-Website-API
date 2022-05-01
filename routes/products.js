@@ -16,7 +16,9 @@ router
 	.delete(deleteAllProducts);
 
 router
-	.route('products/:id')
+	.route('/products/:id')
 	.get(getProduct)
 	.delete(deleteProduct)
 	.patch(updateProduct);
+
+module.exports = router;

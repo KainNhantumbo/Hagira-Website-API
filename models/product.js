@@ -17,7 +17,6 @@ const productSchema = new mongoose.Schema({
 		type: Array,
 	},
 	default_color: {
-		required: true,
 		type: String,
 		maxlength: 30,
 		trim: true,
