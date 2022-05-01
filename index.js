@@ -18,7 +18,7 @@ const cors = require('cors');
 	app.use(cors({origin: 'http://localhost:3000'}));
 	
 	// body parser
-	app.use(express.json({limit: '2000000'}));
+	app.use(express.json({limit: '800000'}));
 	
 	// routes
 	app.use('/api/v1', subscriptorRoutes);
