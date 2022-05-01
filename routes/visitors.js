@@ -7,7 +7,7 @@ const {
 } = require('../controllers/visitor-controller');
 
 router
-	.route('/visitor')
+	.route('/visitors')
 	.get(getVisitors)
 	.post(createVisitor)
 	.delete(deleteVisitors);
