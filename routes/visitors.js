@@ -21,6 +21,14 @@ router
 		} catch (err) {
 			res.status(500).json({ err });
 		}
+	})
+	.delete(async (req, res) => {
+		try {
+			await Visitor.deleteMany({});
+			res.status(200).json({ status: 'sucessfull' });
+		} catch (err) {
+			res.status(500).json({ err });
+		}
 	});
 
 module.exports = router;
