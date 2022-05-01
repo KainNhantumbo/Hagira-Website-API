@@ -1,4 +1,37 @@
 const Email = require('../models/email');
+const env = require('dotenv');
+const email = require('../models/email');
+const nodeMailer = require('nodemailer');
+
+// environment configuration
+env.config();
+
+// email sending configuration
+const emailSender = async (email) => {
+	try {
+		const message = {
+      from: process.env.EMAIL_ACCOUNT,
+			to: email.to,
+			text: email.message,
+			subject: email.subject,
+		};
+
+		// transport config
+		const transporter = nodeMailer.createTransport({
+			secure: false,
+			host: 'mail.google.com',
+			auth: {
+				user: process.env.EMAIL_ACCOUNT,
+				pass: process.env.EMAIL_PASSWORD,
+			},
+		});
+
+    // sends the email message
+		await transporter.sendMail(message);
+	} catch (err) {
+		console.log(err);
+	}
+};
 
 //  gets all emails from database
 const getAllEmails = async (req, res) => {
@@ -14,6 +47,7 @@ const getAllEmails = async (req, res) => {
 const createEmail = async (req, res) => {
 	try {
 		await Email.create(req.body);
+    await emailSender(req.body)
 		res.status(201).json({ status: 'Created sucessfully' });
 	} catch (err) {
 		res.status(500).json({ err });
