@@ -6,6 +6,7 @@ const messageRoutes = require('./routes/messages');
 const subscriptorRoutes = require('./routes/subscriptions');
 const visitorRoutes = require('./routes/visitors');
 const productRoutes = require('./routes/products');
+const emailRoutes = require('./routes/emails')
 const not_foundRoute = require('./middlewares/not-found');
 const cors = require('cors');
 
@@ -25,6 +26,7 @@ const cors = require('cors');
 	app.use('/api/v1', messageRoutes);
 	app.use('/api/v1', visitorRoutes);
 	app.use('/api/v1', productRoutes);
+	app.use('/api/v1', emailRoutes);
 	app.use(not_foundRoute);
 
 // loading the port
