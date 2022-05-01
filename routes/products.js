@@ -21,4 +21,42 @@ router
 		} catch (err) {
 			res.status(500).json({ err });
 		}
+	})
+	.delete(async (req, res) => {
+		try {
+			await Product.deleteMany({});
+			res.status(200).json({ status: 'Deleted sucessfully' });
+		} catch (err) {
+			res.status(500).json({ err });
+		}
+	});
+
+router
+	.route('products/:id')
+	.get(async (req, res) => {
+		try {
+			const product_id = req.params.id;
+			const product = await Product.findOne({ _id: product_id });
+			res.status(200).json({ product, status: 'sucessfull' });
+		} catch (err) {
+			res.status(500).json({ err });
+		}
+	})
+	.delete(async (req, res) => {
+		try {
+			const product_id = req.params.id;
+			await Product.findOneAndDelete({ _id: product_id });
+			res.status(200).json({ status: 'Deleted sucessfully' });
+		} catch (err) {
+			res.status(500).json({ err });
+		}
+	})
+	.patch(async (req, res) => {
+		try {
+			const product_id = req.params.id;
+			await Product.findOneAndUpdate({ _id: product_id });
+			res.status(200).json({ status: 'Updated sucessfully' });
+		} catch (err) {
+			res.status(500).json({ err });
+		}
 	});
