@@ -29,4 +29,14 @@ router
 		}
 	});
 
+router.route('/emails/:id').delete(async (req, res) => {
+	try {
+		const email_id = req.params.id;
+		await Email.findOneAndDelete({ _id: email_id });
+		res.status(200).json({ status: 'Deleted sucessfully.' });
+	} catch (err) {
+		res.status(500).json({ err });
+	}
+});
+
 module.exports = router;
