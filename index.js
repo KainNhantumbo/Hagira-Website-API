@@ -5,6 +5,7 @@ const cors = require('cors');
 const db_connetion = require('./database/connect');
 const messageRoutes = require('./routes/messages');
 const subscriptorRoutes = require('./routes/subscriptions');
+const visitorRoutes = require('./routes/visitors');
 const not_foundRoute = require('./middlewares/not-found');
 
 // middlewares
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(cors());
 app.use('/api/v1', subscriptorRoutes);
 app.use('/api/v1', messageRoutes);
+app.use('/api/v1', visitorRoutes);
 app.use(not_foundRoute);
 
 // config
