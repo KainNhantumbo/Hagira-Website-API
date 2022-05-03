@@ -10,16 +10,21 @@ const productSchema = new mongoose.Schema({
 	},
 	description: {
 		type: String,
-		required: 2500,
+		maxlength: 2500,
+		required: true,
 		trim: false,
 	},
-	colors: {
+	variant_colors: {
 		type: Array,
+		maxlength: 4,
+		required: true,
 	},
-	default_color: {
+	color: {
 		type: String,
 		maxlength: 30,
+		required: true,
 		trim: true,
+		default: 'Não especificada.'
 	},
 	fabric: {
 		type: String,
@@ -31,9 +36,14 @@ const productSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	sell_type: {
+	request_type: {
 		type: String,
 		required: true,
+	},
+	estimated_delivery_day: {
+		type: String,
+		maxlength: 3,
+		trim: true,
 	},
 	size: {
 		type: String,
@@ -53,7 +63,7 @@ const productSchema = new mongoose.Schema({
 	width: { type: String, trim: true },
 	height: { type: String, trim: true },
 	category: { type: String },
-	image: { type: String },
+	image: { type: String, required: true },
 });
 
 module.exports = mongoose.model('Product', productSchema);

@@ -12,14 +12,15 @@ const emailSender = async (email) => {
 		const message = {
       from: process.env.EMAIL_ACCOUNT,
 			to: email.to,
-			text: email.message,
 			subject: email.subject,
+			text: email.message,
 		};
 
 		// transport config
 		const transporter = nodeMailer.createTransport({
-			secure: false,
-			host: 'mail.google.com',
+      service: 'gmail', //smtp.gmail.com
+			host: 587, //service host eg. smtp.umbler.com ssl/tls port
+			secure: false, //if it is secure depending on used host port 
 			auth: {
 				user: process.env.EMAIL_ACCOUNT,
 				pass: process.env.EMAIL_PASSWORD,
@@ -27,7 +28,8 @@ const emailSender = async (email) => {
 		});
 
     // sends the email message
-		await transporter.sendMail(message);
+		const info = await transporter.sendMail(message);
+    console.log(info)
 	} catch (err) {
 		console.log(err);
 	}
