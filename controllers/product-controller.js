@@ -3,7 +3,12 @@ const Product = require('../models/product');
 // gets all database products
 const getAllProducts = async (req, res) => {
 	try {
+		const {} = req.query
+		
+		
 		const products = await Product.find({});
+
+
 		res
 			.status(200)
 			.json({ results: products.length, products, status: 'sucessfull' });

@@ -24,7 +24,7 @@ const productSchema = new mongoose.Schema({
 		maxlength: 30,
 		required: true,
 		trim: true,
-		default: 'Não especificada.'
+		default: 'Não especificada.',
 	},
 	fabric: {
 		type: String,
@@ -53,6 +53,10 @@ const productSchema = new mongoose.Schema({
 	date: {
 		type: Object,
 		required: true,
+	},
+	createdAt: {
+		type: Date,
+		default: Date.now(),
 	},
 	price: {
 		type: String,
