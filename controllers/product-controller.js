@@ -39,6 +39,16 @@ const getAllProducts = async (req, res) => {
 			result = result.select(fieldList);
 		}
 
+		// places a limit of results
+		if (product_limit) {
+			result = result.limit(Number(product_limit));
+		}
+
+		// skips results
+		if (product_skip) {
+			result = result.skip(Number(product_skip));
+		}
+
 		const products = await result;
 
 		res
