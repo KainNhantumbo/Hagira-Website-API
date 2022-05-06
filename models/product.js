@@ -43,6 +43,7 @@ const productSchema = new mongoose.Schema({
 	estimated_delivery_day: {
 		type: String,
 		maxlength: 3,
+		default: '1',
 		trim: true,
 	},
 	size: {

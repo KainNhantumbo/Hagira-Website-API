@@ -3,11 +3,43 @@ const Product = require('../models/product');
 // gets all database products
 const getAllProducts = async (req, res) => {
 	try {
-		const {} = req.query
-		
-		
-		const products = await Product.find({});
+		const {
+			product_name,
+			product_class,
+			product_category,
+			product_sort,
+			product_fields,
+			product_limit,
+			product_skip,
+		} = req.query;
+		const query_params = {};
 
+		if (product_name) {
+			query_params.name = { $regex: product_name, $options: 'i' };
+		}
+		if (product_class) {
+			query_params.class = product_class;
+		}
+		if (product_category) {
+			query_params.category = category;
+		}
+
+		// returns results based on query params
+		let result = Product.find(query_params);
+
+		if (product_sort) {
+			const sortList = product_sort;
+			result = result.sort(sortList);
+		} else {
+			result = result.sort('-createdAt');
+		}
+
+		if (product_fields) {
+			const fieldList = product_fields.split(',').join(' ');
+			result = result.select(fieldList);
+		}
+
+		const products = await result;
 
 		res
 			.status(200)
