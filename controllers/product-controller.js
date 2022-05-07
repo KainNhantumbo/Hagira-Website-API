@@ -21,7 +21,7 @@ const getAllProducts = async (req, res) => {
 			query_params.class = product_class;
 		}
 		if (product_category) {
-			query_params.category = category;
+			query_params.category = product_category;
 		}
 
 		// returns results based on query params
@@ -30,27 +30,21 @@ const getAllProducts = async (req, res) => {
 		if (product_sort) {
 			const sortList = product_sort;
 			result = result.sort(sortList);
-		} else {
-			result = result.sort('-createdAt');
-		}
-
+		} 
 		if (product_fields) {
 			const fieldList = product_fields.split(',').join(' ');
 			result = result.select(fieldList);
 		}
-
 		// places a limit of results
 		if (product_limit) {
 			result = result.limit(Number(product_limit));
 		}
-
 		// skips results
 		if (product_skip) {
 			result = result.skip(Number(product_skip));
 		}
 
 		const products = await result;
-
 		res
 			.status(200)
 			.json({ results: products.length, products, status: 'sucessfull' });
