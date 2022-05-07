@@ -7,9 +7,9 @@ const {
 } = require('../controllers/payment-controller');
 
 // get and create routes
-router.route('/').get(getAllPayments).post(createPayment);
+router.route('/payments').get(getAllPayments).post(createPayment);
 
 // delete routes
-router.route('/:id').delete(deletePayment);
+router.route('/payments/:id').delete(deletePayment);
 
 module.exports = router;

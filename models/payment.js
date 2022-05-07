@@ -52,14 +52,17 @@ const paymentSchema = new mongoose.Schema({
 	adress: {
 		type: String,
 		required: true,
-		trim: true,
 		maxlength: 150,
 	},
 	payment_method: {
 		type: String,
 		required: true,
 		trim: true,
-		maxlength: 10,
+		maxlength: 20,
+	},
+	date: {
+		type: Object,
+		required: true
 	},
 	payment_value: {
 		type: String,
@@ -69,8 +72,6 @@ const paymentSchema = new mongoose.Schema({
 	},
 	comment: {
 		type: String,
-		required: false,
-		trim: true,
 		maxlength: 2500,
 	},
 });
