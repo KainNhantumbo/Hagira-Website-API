@@ -4,9 +4,14 @@ const {
 	getMessages,
 	createMessage,
 	deleteMessage,
+	deleteAllMessages,
 } = require('../controllers/message-controller');
 
-router.route('/messages').get(getMessages).post(createMessage);
+router
+	.route('/messages')
+	.get(getMessages)
+	.post(createMessage)
+	.delete(deleteAllMessages);
 
 router.route('/messages/:id').delete(deleteMessage);
 
