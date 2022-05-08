@@ -62,7 +62,7 @@ const paymentSchema = new mongoose.Schema({
 	},
 	date: {
 		type: Object,
-		required: true
+		required: true,
 	},
 	payment_value: {
 		type: String,
@@ -73,6 +73,15 @@ const paymentSchema = new mongoose.Schema({
 	comment: {
 		type: String,
 		maxlength: 2500,
+	},
+	paid_product_id: {
+		type: String,
+	},
+	paid_product_name: {
+		type: String,
+	},
+	paid_product_price: {
+		type: String,
 	},
 });
 
