@@ -28,9 +28,10 @@ const getAllProducts = async (req, res) => {
 		let result = Product.find(query_params);
 
 		if (product_sort) {
-			const sortList = product_sort;
+			const sortList = product_sort.split(',').join(' ');
 			result = result.sort(sortList);
 		} 
+		
 		if (product_fields) {
 			const fieldList = product_fields.split(',').join(' ');
 			result = result.select(fieldList);

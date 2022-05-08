@@ -7,7 +7,7 @@ const getAllPayments = async (req, res) => {
 		const query_params = {};
 
 		if (search) {
-			query_params.search = { $regex: search, $options: 'i' };
+			query_params.name = { $regex: search, $options: 'i' };
 		}
 		let result = Payment.find(query_params);
 
