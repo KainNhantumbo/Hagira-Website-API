@@ -6,7 +6,21 @@ const getSubscriptors = async (req, res) => {
 		const subscriptions = await Subscriptor.find({});
 		res
 			.status(200)
-			.json({ results: subscriptions.length, subscriptions, status: 'sucess' });
+			.json({
+				results: subscriptions.length,
+				subscriptions,
+				status: 'sucessfull',
+			});
+	} catch (err) {
+		res.status(500).json({ err });
+	}
+};
+
+// deletes all newsletter subscriptors
+const deleteAllSubscriptors = async (req, res) => {
+	try {
+		await Subscriptor.deleteMany({});
+		res.status(200).json({ status: 'Data erased sucessfully' });
 	} catch (err) {
 		res.status(500).json({ err });
 	}
@@ -16,7 +30,7 @@ const getSubscriptors = async (req, res) => {
 const createSubscriptor = async (req, res) => {
 	try {
 		await Subscriptor.create(req.body);
-    res.status(201).json({ status: 'Created sucessfully' });
+		res.status(201).json({ status: 'Created sucessfully' });
 	} catch (err) {
 		res.status(500).json({ err });
 	}
@@ -38,5 +52,5 @@ const deleteSubscriptor = async (req, res) => {
 module.exports = {
 	getSubscriptors,
 	createSubscriptor,
-	deleteSubscriptor,
+	deleteSubscriptor, deleteAllSubscriptors
 };
