@@ -6,13 +6,14 @@ const {
 	deleteMessage,
 	deleteAllMessages,
 } = require('../controllers/message-controller');
+const auth = require('../middlewares/auth');
 
 router
 	.route('/')
-	.get(getMessages)
+	.get(auth, getMessages)
 	.post(createMessage)
-	.delete(deleteAllMessages);
+	.delete(auth, deleteAllMessages);
 
-router.route('/:id').delete(deleteMessage);
+router.route('/:id').delete(auth, deleteMessage);
 
 module.exports = router;

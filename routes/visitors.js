@@ -5,11 +5,12 @@ const {
 	createVisitor,
 	deleteVisitors,
 } = require('../controllers/visitor-controller');
+const auth = require('../middlewares/auth');
 
 router
 	.route('/')
-	.get(getVisitors)
+	.get(auth, getVisitors)
 	.post(createVisitor)
-	.delete(deleteVisitors);
+	.delete(auth, deleteVisitors);
 
 module.exports = router;
