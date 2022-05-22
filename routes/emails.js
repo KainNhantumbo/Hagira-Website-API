@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { createEmail } = require('../controllers/email-controller');
 
-router
-	.route('/emails')
-	.post(createEmail);
+router.post('/', createEmail);
 
 module.exports = router;

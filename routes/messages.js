@@ -8,11 +8,11 @@ const {
 } = require('../controllers/message-controller');
 
 router
-	.route('/messages')
+	.route('/')
 	.get(getMessages)
 	.post(createMessage)
 	.delete(deleteAllMessages);
 
-router.route('/messages/:id').delete(deleteMessage);
+router.route('/:id').delete(deleteMessage);
 
 module.exports = router;

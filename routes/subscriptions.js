@@ -7,8 +7,8 @@ const {
 	deleteAllSubscriptors,
 } = require('../controllers/subscriptor-controller');
 
-router.route('/newsletter').get(getSubscriptors).post(createSubscriptor).delete(deleteAllSubscriptors);
+router.route('/').get(getSubscriptors).post(createSubscriptor).delete(deleteAllSubscriptors);
 
-router.route('/newsletter/:id').delete(deleteSubscriptor);
+router.route('/:id').delete(deleteSubscriptor);
 
 module.exports = router;
