@@ -14,7 +14,6 @@ const cors = require('cors');
 // middlewares
 // environment config
 env.config();
-
 // cors config
 app.use(cors({ origin: 'http://localhost:3000' }));
 
