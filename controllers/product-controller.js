@@ -42,7 +42,7 @@ const getAllProducts = async (req, res) => {
 		}
 		// skips results
 		if (product_skip) {
-			result = result.skip(Number(product_skip));
+			result = result.skip(product_skip);
 		}
 
 		const products = await result;

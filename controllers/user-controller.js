@@ -6,25 +6,28 @@ const env = require('dotenv');
 // loads environment variables
 env.config();
 
-// generates a token
-const generateToken = (user) =>
+// asyncronous function that creates tokens
+const tokenCreator = (user) =>
 	new Promise((resolve) => {
-		const newUserToken = jwt.sign(
-			{ user_name: user.name, user_id: user._id },
-			process.env.SECRET_TOKEN,
+		const token = jwt.sign(
 			{
-				expiresIn: '1d',
-			}
+				user_id: user._id,
+				user_name: `${user.name} ${user.surname}`,
+			},
+			process.env.SECRET_TOKEN,
+			{ expiresIn: '1d' }
 		);
-		resolve(newUserToken);
+
+		resolve(token);
 	});
 
 // register a user to system
 const register = async (req, res) => {
 	try {
-		const { name, email, password } = req.body;
-		const user = await User.create({ name, email, password });
-		const token = await generateToken(user);
+		const credentials = req.body;
+		const user = await User.create({ ...credentials });
+		console.log(user, 'logger');
+		const token = await tokenCreator(user);
 		res.status(201).json({ token, message: 'User created.' });
 	} catch (err) {
 		res.status(500).json({ err });
@@ -35,7 +38,7 @@ const register = async (req, res) => {
 const login = async (req, res) => {
 	const { email, password } = req.body;
 	try {
-		if (!password || email)
+		if (!password || !email)
 			return res
 				.status(400)
 				.json({ message: 'Please, provide email and password.' });
@@ -49,7 +52,7 @@ const login = async (req, res) => {
 		if (!match)
 			return res.status(401).json({ message: 'Wrong password, try again.' });
 
-		const token = await generateToken(user);
+		const token = await tokenCreator(user);
 		res.status(200).json({ token });
 	} catch (err) {
 		res.status(500).json({ err });

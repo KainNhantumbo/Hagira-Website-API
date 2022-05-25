@@ -1,19 +1,17 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const { assign } = require('nodemailer/lib/shared');
 
-const user_schema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
 	name: {
 		type: String,
-		trim: true,
 		required: [true, 'Must provide a user name.'],
 		maxlength: [200, 'The name provided is too long.'],
-		minlength: [10, 'The name provided is too short.'],
+		minlength: [5, 'The name provided is too short.'],
 	},
 	email: {
 		type: String,
+		required: [true, 'Please provide a user e-mail.'],
 		trim: true,
-		required: [true, 'Must provide an email.'],
 		match: [
 			/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 			'Please provide a valid email.',
@@ -28,9 +26,9 @@ const user_schema = new mongoose.Schema({
 });
 
 // bcrypt password encryption
-user_schema.pre('save', async function () {
-	const salt = await bcrypt.getRounds(10);
+userSchema.pre('save', async function () {
+	const salt = await bcrypt.genSalt(10);
 	this.password = await bcrypt.hash(this.password, salt);
 });
 
-module.exports = mongoose.model('User', user_schema);
+module.exports = mongoose.model('User', userSchema);
