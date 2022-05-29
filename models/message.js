@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-// message schema
 const messageSchema = new mongoose.Schema({
 	email: {
 		type: String,

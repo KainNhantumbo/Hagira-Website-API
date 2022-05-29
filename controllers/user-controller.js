@@ -17,11 +17,9 @@ const tokenCreator = (user) =>
 			process.env.SECRET_TOKEN,
 			{ expiresIn: '1d' }
 		);
-
 		resolve(token);
 	});
 
-// register a user to system
 const register = async (req, res) => {
 	try {
 		const credentials = req.body;

@@ -1,23 +1,19 @@
 const Payment = require('../models/payment');
 
-// gets all payments fromm database
 const getAllPayments = async (req, res) => {
 	try {
 		const { sort, search } = req.query;
 		const query_params = {};
-
 		if (search) {
 			query_params.name = { $regex: search, $options: 'i' };
 		}
 		let result = Payment.find(query_params);
-
 		if (sort) {
 			let sortList = sort.split(',').join(' ');
 			result = result.sort(sortList);
 		} else {
 			result = result.sort('name');
 		}
-
 		const payments = await result;
 		res.status(200).json({ results: payments.length, payments });
 	} catch (err) {
@@ -25,7 +21,6 @@ const getAllPayments = async (req, res) => {
 	}
 };
 
-// creates a payment record
 const createPayment = async (req, res) => {
 	try {
 		const data = req.body;
@@ -36,7 +31,6 @@ const createPayment = async (req, res) => {
 	}
 };
 
-// delete payments
 const deletePayment = async (req, res) => {
 	try {
 		const { id: payment_id } = req.params;

@@ -1,6 +1,5 @@
 const Visitor = require('../models/visitor');
 
-// gets all visitors from database
 const getVisitors = async (req, res) => {
 	try {
 		const visitors = Visitor.find({});
@@ -12,7 +11,6 @@ const getVisitors = async (req, res) => {
 	}
 };
 
-// creates a visitor
 const createVisitor = async (req, res) => {
 	try {
 		await Visitor.create(req.body);
@@ -22,7 +20,6 @@ const createVisitor = async (req, res) => {
 	}
 };
 
-// deletes all visitor records from database
 const deleteVisitors = async (req, res) => {
 	try {
 		await Visitor.deleteMany({});

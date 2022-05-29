@@ -1,6 +1,5 @@
 const Product = require('../models/product');
 
-// gets all database products
 const getAllProducts = async (req, res) => {
 	try {
 		const {
@@ -13,7 +12,6 @@ const getAllProducts = async (req, res) => {
 			product_skip,
 		} = req.query;
 		const query_params = {};
-
 		if (product_name) {
 			query_params.name = { $regex: product_name, $options: 'i' };
 		}
@@ -26,12 +24,10 @@ const getAllProducts = async (req, res) => {
 
 		// returns results based on query params
 		let result = Product.find(query_params);
-
 		if (product_sort) {
 			const sortList = product_sort.split(',').join(' ');
 			result = result.sort(sortList);
 		}
-
 		if (product_fields) {
 			const fieldList = product_fields.split(',').join(' ');
 			result = result.select(fieldList);
@@ -40,11 +36,9 @@ const getAllProducts = async (req, res) => {
 		if (product_limit) {
 			result = result.limit(Number(product_limit));
 		}
-		// skips results
 		if (product_skip) {
 			result = result.skip(product_skip);
 		}
-
 		const products = await result;
 		res.status(200).json({ results: products.length, products });
 	} catch (err) {
@@ -52,7 +46,6 @@ const getAllProducts = async (req, res) => {
 	}
 };
 
-// creates a new product
 const createProduct = async (req, res) => {
 	try {
 		await Product.create(req.body);
@@ -62,7 +55,6 @@ const createProduct = async (req, res) => {
 	}
 };
 
-// deletes all produts from database
 const deleteAllProducts = async (req, res) => {
 	try {
 		await Product.deleteMany({});
@@ -72,7 +64,6 @@ const deleteAllProducts = async (req, res) => {
 	}
 };
 
-// gets a single product
 const getProduct = async (req, res) => {
 	try {
 		const product_id = req.params.id;
@@ -83,7 +74,6 @@ const getProduct = async (req, res) => {
 	}
 };
 
-// deletes a product
 const deleteProduct = async (req, res) => {
 	try {
 		const product_id = req.params.id;
@@ -94,7 +84,6 @@ const deleteProduct = async (req, res) => {
 	}
 };
 
-// updates a product
 const updateProduct = async (req, res) => {
 	try {
 		const product_id = req.params.id;

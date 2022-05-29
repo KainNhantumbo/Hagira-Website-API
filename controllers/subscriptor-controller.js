@@ -1,6 +1,5 @@
 const Subscriptor = require('../models/subscriptor');
 
-// gets all newsletter subscriptors
 const getSubscriptors = async (req, res) => {
 	try {
 		const subscriptions = await Subscriptor.find({});
@@ -16,7 +15,6 @@ const getSubscriptors = async (req, res) => {
 	}
 };
 
-// deletes all newsletter subscriptors
 const deleteAllSubscriptors = async (req, res) => {
 	try {
 		await Subscriptor.deleteMany({});
@@ -26,7 +24,6 @@ const deleteAllSubscriptors = async (req, res) => {
 	}
 };
 
-// creates a new newsletter subscriptor
 const createSubscriptor = async (req, res) => {
 	try {
 		await Subscriptor.create(req.body);
@@ -36,7 +33,6 @@ const createSubscriptor = async (req, res) => {
 	}
 };
 
-// deletes a newsletter subscriptor
 const deleteSubscriptor = async (req, res) => {
 	try {
 		const { id: subscriptor_id } = req.params;

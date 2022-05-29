@@ -1,6 +1,5 @@
 const emailSender = require('../services/email-service');
 
-// creates a new email
 const createEmail = async (req, res) => {
 	try {
 		await emailSender(req.body);
