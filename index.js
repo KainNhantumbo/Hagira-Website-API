@@ -12,13 +12,24 @@ const paymentRoutes = require('./routes/payments');
 const not_foundRoute = require('./middlewares/not-found');
 const cors = require('cors');
 
-// middlewares
 // environment config
 env.config();
-// cors config
-app.use(cors({ origin: 'http://localhost:3000' }));
 
-// body parser
+// security
+const helmet = require('helmet');
+const xssCleaner = require('xss-clean');
+const rateLimiter = require('express-rate-limit');
+const limiter = rateLimiter({
+	windowMs: 10 * 60 * 1000,
+	max: 100,
+	standardHeaders: true,
+	legacyHeaders: false,
+});
+
+app.use(limiter);
+app.use(helmet())
+app.use(xssCleaner());
+app.use(cors({ origin: process.env.CLIENT }));
 app.use(express.json({ limit: '800000' }));
 
 // routes
@@ -39,8 +50,8 @@ const start_server = async () => {
 	try {
 		await db_connetion(process.env.MONGO_URI);
 		app.listen(PORT, console.log(`Server running on ${PORT}...`));
-	} catch (e) {
-		console.log(e);
+	} catch (err) {
+		console.log(err);
 	}
 };
 

@@ -1,6 +1,5 @@
 const Message = require('../models/message');
 
-// gets all messages
 const getMessages = async (req, res) => {
 	try {
 		const messages = await Message.find({});
@@ -12,7 +11,6 @@ const getMessages = async (req, res) => {
 	}
 };
 
-// creates a message
 const createMessage = async (req, res) => {
 	try {
 		const message = req.body;
@@ -23,7 +21,6 @@ const createMessage = async (req, res) => {
 	}
 };
 
-// deletes all messages
 const deleteAllMessages = async (req, res) => {
 	try {
 		await Message.deleteMany({});
@@ -33,7 +30,6 @@ const deleteAllMessages = async (req, res) => {
 	}
 };
 
-// deletes a message
 const deleteMessage = async (req, res) => {
 	try {
 		const { id: message_id } = req.params;
