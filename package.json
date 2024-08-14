@@ -19,7 +19,7 @@
     "express-rate-limit": "^6.4.0",
     "helmet": "^5.1.0",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^6.2.6",
+    "mongoose": "^6.11.3",
     "nodemailer": "^6.7.4",
     "passport": "^0.5.2",
     "xss-clean": "^0.1.1"
